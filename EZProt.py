@@ -18,30 +18,46 @@ from Bio.Align.Applications import MuscleCommandline
 from Bio.Phylo.Applications import RaxmlCommandline
 
 #Command-line initialization of the program, spacing used to add white space
+os.system('clear')
 print("")
 print("")
-print("Welcome to EZProt version 1.0, a tool for data mining in the genomic sciences.")
+print("Welcome to EZProt version 1.1, a tool for data mining in the genomic sciences.")
 print("")
 print("")
-print("We recommend that you cd to your directory containing the fasta files you would like to analyze and pwd to copy the path.")
+print("We recommend that you cd to the directory containing the subdirectory full of fasta files prior to running EZProt; enter 'ctrl+Z' to revert back to the CLI.")
 print("")
 print("")
+print("The path to your current directory is: ")
+path = subprocess.check_output('pwd')
+print(path)
+print("")
+print("")
+print("The following subdirectories are included inside of your current working directory: ")
+from glob import glob
+print(glob("./*/"))
+print("")
+print("")
+
 #user selects the directory they would like for the program to iterate over, os.chdir changes to that directory
 userdir = raw_input("Please write the path to the directory you would like to iterate over: ")
 os.chdir(userdir)
 print("")
+print("")
 #user selects MSA software
 program1 = raw_input("Which program would you like to use to create your alignment? (type either 'tcoffee', 'muscle', or 'clustalo'): ")
+print("")
 print("")
 #user either includes or excludes trimal
 trimal = raw_input("Would you like to optimize your alignment using trimAl version 1.2? (type either 'yes' or 'no'): ")
 print("")
+print("")
 #platform variable is used in all subprocess calls throughout the program
 platform = raw_input("What platform are you using? (ex: mac32, mac64, win32, win64, etc.): ")
 print("")
+print("")
 
 
-print("Your directory will now be analyzed")
+print("Your subdirectory will now be analyzed")
 #initializes a files variable that takes count of all files in the denoted directory
 files = [f for f in os.listdir('.') if os.path.isfile(f)]
 i = 0
@@ -91,6 +107,10 @@ for f in files:
 
         #i variable is used to count the number of files that are iterated over
         i = i + 1
-print('Total number of files analyzed: ', i)
+print("")
+print("")
+print("Total number of files analyzed: "+str(i))
+print("")
+print("")
 
 #sys.exit() is not used, this way commands and selections can be copied and pasted for documentation
