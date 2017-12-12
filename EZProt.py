@@ -17,44 +17,53 @@ from Bio.Align.Applications import TCoffeeCommandline
 from Bio.Align.Applications import MuscleCommandline
 from Bio.Phylo.Applications import RaxmlCommandline
 
-#Command-line initialization of the program, spacing used to add white space
+#define functions to app more white-space to the text interface
+def newLine():
+    print("")
+def twoLines():
+    newLine()
+    newLine()
+
+#Command-line initialization of the program
 os.system('clear')
-print("")
-print("")
-print("Welcome to EZProt version 1.1, a tool for data mining in the genomic sciences.")
-print("")
-print("")
+
+twoLines()
+
+print("Welcome to EZProt version 1.2, a tool for rapid data interpretation in the genomic sciences.")
+
+twoLines()
+
 print("We recommend that you cd to the directory containing the subdirectory full of fasta files prior to running EZProt; enter 'ctrl+Z' to revert back to the CLI.")
-print("")
-print("")
+
+twoLines()
+
 print("The path to your current directory is: ")
 path = subprocess.check_output('pwd')
 print(path)
-print("")
-print("")
+
+twoLines()
+
 print("The following subdirectories are included inside of your current working directory: ")
 from glob import glob
 print(glob("./*/"))
-print("")
-print("")
 
-#user selects the directory they would like for the program to iterate over, os.chdir changes to that directory
-userdir = raw_input("Please write the path to the directory you would like to iterate over: ")
+twoLines()
+
+#user selects the subdirectory they would like for the program to analyze, os.chdir cds into that subdirectory
+userdir = raw_input("Please write the path to the directory you would like to have analyzed: ")
 os.chdir(userdir)
-print("")
-print("")
+twoLines()
 #user selects MSA software
 program1 = raw_input("Which program would you like to use to create your alignment? (type either 'tcoffee', 'muscle', or 'clustalo'): ")
-print("")
-print("")
+program1 = program1.lower()
+twoLines()
 #user either includes or excludes trimal
 trimal = raw_input("Would you like to optimize your alignment using trimAl version 1.2? (type either 'yes' or 'no'): ")
-print("")
-print("")
+trimal = trimal.lower()
+twoLines()
 #platform variable is used in all subprocess calls throughout the program
 platform = raw_input("What platform are you using? (ex: mac32, mac64, win32, win64, etc.): ")
-print("")
-print("")
+twoLines()
 
 
 print("Your subdirectory will now be analyzed")
@@ -66,7 +75,6 @@ for f in files:
         in_file = f
         out_file = f+"_aligned"
         out_file2 = f+"_optimized"
-        program1 = program1.lower()
 
         print("initializing multiple sequence alignment")
 
@@ -107,10 +115,8 @@ for f in files:
 
         #i variable is used to count the number of files that are iterated over
         i = i + 1
-print("")
-print("")
+twoLines()
 print("Total number of files analyzed: "+str(i))
-print("")
-print("")
+twoLines()
 
 #sys.exit() is not used, this way commands and selections can be copied and pasted for documentation
